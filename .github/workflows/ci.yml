@@ -20,17 +20,18 @@ jobs:
         with:
           python-version: 3.x
 
-      - name: Install dependencies
+      - name: Create virtual environment and install dependencies
         run: |
           python -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install behave behave-webdriver selenium==3.141.0 urllib3==1.26.1
 
       - name: Run behave tests
         run: |
           source venv/bin/activate
           behave
+
 
   pytest-tests:
     runs-on: ubuntu-latest
