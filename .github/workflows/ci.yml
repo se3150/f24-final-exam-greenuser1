@@ -24,10 +24,12 @@ jobs:
       - name: Start Chrome in headless mode
         run: |
           google-chrome --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 &
-      - name: Wait for Chrome to be ready
+      - name: Wait for Chrome to initialize
         run: sleep 5
       - name: Run functional tests
-        run: behave features/
+        run: |
+          export DISPLAY=:99
+          behave features/
 
   pytest-tests:
     runs-on: ubuntu-latest
@@ -47,4 +49,4 @@ jobs:
       - name: Run pytest tests
         run: |
           source venv/bin/activate
-          pytest
+          pyte
