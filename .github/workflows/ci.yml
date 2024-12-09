@@ -14,15 +14,24 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+
       - name: Install chromedriver
         uses: nanasess/setup-chromedriver@master
+
       - name: Install dependencies
         run: |
           pip install selenium==3.141.0
           pip install behave==1.2.6
           pip install behave-webdriver==0.3.1
+
+      - name: Set up Chrome options
+        run: |
+          export DISPLAY=:99
+          google-chrome --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 &
+
       - name: Run functional tests
         run: behave features/
+
 
   pytest-tests:
     runs-on: ubuntu-latest
