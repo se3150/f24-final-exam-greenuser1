@@ -14,33 +14,15 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-
-      - name: Install ChromeDriver
+      - name: Install chromedriver
         uses: nanasess/setup-chromedriver@master
-
-      - name: Set up virtual environment and install dependencies
+      - name: Install dependencies
         run: |
-          python -m venv venv
-          source venv/bin/activate
-          pip install --upgrade pip
-          pip install behave behave-webdriver
-
-      - name: Run Squirrel Server
-        run: |
-          nohup python3 squirrel_server.py &
-          sleep 5
-
-      - name: Run HTTP Server
-        run: |
-          nohup python3 -m http.server 8000 &
-          sleep 3
-
-      - name: Run behave tests
-        run: |
-          source venv/bin/activate
-          behave
-
-
+          pip install selenium==3.141.0
+          pip install behave==1.2.6
+          pip install behave-webdriver==0.3.1
+      - name: Run functional tests
+        run: behave features/
 
   pytest-tests:
     runs-on: ubuntu-latest
