@@ -10,39 +10,35 @@ on:
 
 jobs:
   RunFunctionalTests:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout repo
-      uses: actions/checkout@v2
-    - name: Install chromedriver
-      uses: nanasess/setup-chromedriver@master
-    - name: Install dependencies
-      run: |
-        pip install selenium==3.141.0
-        pip install behave==1.2.6
-        pip install behave-webdriver==0.3.1
-    - name: Run functional tests
-      run: behave features/
-
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Install chromedriver
+        uses: nanasess/setup-chromedriver@master
+      - name: Install dependencies
+        run: |
+          pip install selenium==3.141.0
+          pip install behave==1.2.6
+          pip install behave-webdriver==0.3.1
+      - name: Run functional tests
+        run: behave features/
 
   pytest-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
           python-version: '3.x'
-
-      - name: Set up environment
+      - name: Install dependencies
         run: |
           python -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
-
       - name: Run pytest tests
         run: |
           source venv/bin/activate
