@@ -8,10 +8,6 @@ on:
     branches:
       - main
 
-name: Run Functional Tests
-
-on: [push]
-
 jobs:
   RunFunctionalTests:
     runs-on: ubuntu-latest
@@ -19,7 +15,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Install chromedriver
+      - name: Install ChromeDriver
         uses: nanasess/setup-chromedriver@master
 
       - name: Set up virtual environment and install dependencies
@@ -43,7 +39,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.x
+          python-version: '3.x'
 
       - name: Install dependencies
         run: |
@@ -56,5 +52,3 @@ jobs:
         run: |
           source venv/bin/activate
           pytest
-
-
