@@ -1,13 +1,7 @@
-from selenium import webdriver
-
+import behave_webdriver
 
 def before_all(context):
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    context.behave_driver = webdriver.Chrome(options=options)
-
+    context.behave_driver = behave_webdriver.Chrome.headless()
 
 def after_all(context):
-    if hasattr(context, 'behave_driver'):
-        context.behave_driver.quit()
+    context.behave_driver.quit()
