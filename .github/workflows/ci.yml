@@ -20,14 +20,14 @@ jobs:
         with:
           python-version: 3.x
 
-      - name: Create virtual environment and install dependencies
+      - name: Set up virtual environment and install dependencies
         run: |
           python -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
-          pip install behave behave-webdriver selenium==3.141.0 urllib3==1.26.1
-
-      - name: Run behave tests
+          pip install behave selenium==3.141.0 urllib3==1.26.4
+          
+      - name: Run tests with behave
         run: |
           source venv/bin/activate
           behave
