@@ -1,4 +1,4 @@
-from behave_webdriver import chrome 
+from behave_webdriver import Chrome 
 
 def before_all(context):
     context.behave_driver = Chrome(headless=True, timeout=10)
