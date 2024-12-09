@@ -1,7 +1,13 @@
 from selenium import webdriver
 
 def before_all(context):
-    context.driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver")
+    """Set up ChromeDriver session before tests."""
+    context.driver = webdriver.Chrome(
+        executable_path="/usr/local/bin/chromedriver",
+        options=webdriver.ChromeOptions().add_argument('--headless')
+    )
 
 def after_all(context):
-    context.driver.quit()
+    """Quit ChromeDriver session after tests."""
+    if context.driver:
+        context.driver.quit()
